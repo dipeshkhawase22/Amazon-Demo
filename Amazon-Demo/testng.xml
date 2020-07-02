@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite">
+
+	
+		  <test name="Android Test one" enabled="true">	
+			<parameter name="Automation" value="appium"></parameter>
+			<parameter name="PlatformName" value="android" />
+			<parameter name="PlatformVersion" value="10" />
+			<parameter name="DeviceName" value="OnePlus 5T" />
+			<parameter name="udid" value="8fa163de" /> 
+			<parameter name="Application" value="WSJ App"/> 
+			<parameter name="Port" value="4723"/> 
+			<parameter name="systemPort" value="8200"/> 
+			<classes>
+	
+			 <class name="tests.AmazonTests" /> 
+			</classes>
+	</test>
+
+	
+	
+</suite>
