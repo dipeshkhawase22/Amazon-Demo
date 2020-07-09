@@ -18,14 +18,12 @@ public class ExcelMaker {
 
 	public String project = System.getProperty("user.dir");
 
-		public Map<String, String> getDataFromExcel(String testCaseName, String data) {
+	public Map<String, String> getDataFromExcel(String testCaseName, String data) {
 		String excelFilePath = project + "/data/DataPool.xlsx";
-
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			FileInputStream fiStream = new FileInputStream(new File(excelFilePath));
 			XSSFWorkbook workbook = new XSSFWorkbook(fiStream);
-
 			XSSFSheet sheet = workbook.getSheet("TestCaseSheet");
 			String dataSheetName = "";
 			Iterator<Row> iterator = sheet.iterator();
@@ -39,9 +37,7 @@ public class ExcelMaker {
 				if (nextRow.getCell(0).getStringCellValue().equals(testCaseName)
 						&& nextRow.getCell(1).getStringCellValue().equals(data)) {
 					dataSheetName = nextRow.getCell(2).getStringCellValue();
-
 				}
-
 			}
 			if (dataSheetName.equals("")) {
 				Assert.fail("No excel sheet found.");
@@ -56,7 +52,6 @@ public class ExcelMaker {
 				Row nextRow = iterator2.next();
 				Iterator<Cell> iteratorCell = nextRow.iterator();
 				if (count2 == 0) {
-
 					while (iteratorCell.hasNext()) {
 						Cell nextCell = iteratorCell.next();
 						keys.add(nextCell.getStringCellValue());
@@ -84,13 +79,9 @@ public class ExcelMaker {
 				Assert.fail(
 						"Error occured during data fetching. Please check the Excel sheet for extra or less column(s) present in either keys or value");
 			}
-
 			workbook.close();
-
-		} catch (Exception e) {
-		}
-
+		} 
+		catch (Exception e) {}
 		return map;
-
 	}
 }

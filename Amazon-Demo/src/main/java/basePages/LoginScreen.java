@@ -17,9 +17,12 @@ import utilities.ExcelMaker;
 
 public class LoginScreen extends AmazonBind {
 
+	private static final String SIGNIN_BUTTON = "signInButtonNavigation";
+	private static final String EMAIL = "emailField";
+	private static final String PASSWORD = "passwordField";
+
 	private static Properties prop;
 	public Map<String, String> capData1 = new HashMap<String, String>();
-
 
 	public LoginScreen(MobileDriver driver, ExtentTest test, Map<String, String> capData1) {
 		this.driver = driver;
@@ -30,39 +33,39 @@ public class LoginScreen extends AmazonBind {
 			if (capData1.get("PlatformName").equalsIgnoreCase("Android")) {
 				prop.load(new FileInputStream(new File("./Locators/Android/logIn.properties")));
 			}
-
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public LoginScreen signIn() throws InterruptedException {
-
 		ExcelMaker excelFetch = new ExcelMaker();
 		Map<String, String> signinDetailsMap = excelFetch.getDataFromExcel("Login_And_Place_Order_TC01", "account1");
 		System.out.println("map" + signinDetailsMap);
-
 		verifyStep("App launched", "PASS");
-
-
-		verifyElementIsDisplayed(prop.getProperty("button.signInButtonNavigation"));
-		click(prop.getProperty("button.signInButtonNavigation"));
-
-
-		verifyElementIsDisplayed(prop.getProperty("edit.emailField"));
-		enterText(prop.getProperty("edit.emailField"), signinDetailsMap.get("Username"));
-		click(prop.getProperty("button.continueButton"));
-
+		verifyText(SIGNIN_BUTTON, signInButtonNavigation);
+		verifyElementIsDisplayed(signInButtonNavigation);
+		click(signInButtonNavigation);
+		verifyText(EMAIL, emailField);
+		verifyElementIsDisplayed(emailField);
+		enterText(emailField, signinDetailsMap.get("Username"));
+		click(continueButton);
 		verifyStep("Login Page displayed", "PASS");
-
-
-		verifyElementIsDisplayed(prop.getProperty("edit.passwordField"));
-		enterText(prop.getProperty("edit.passwordField"), signinDetailsMap.get("Password"));
-		click(prop.getProperty("button.logInButton"));
-
+		verifyText(PASSWORD, passwordField);
+		verifyElementIsDisplayed(passwordField);
+		enterText(passwordField, signinDetailsMap.get("Password"));
+		click(logInButton);
 		return this;
-
 	}
+
+	private String signInButtonNavigation = "id===com.amazon.mShop.android.shopping:id/sign_in_button";
+	private String emailField = "xpath===//*[@resource-id='ap_email_login']";
+	private String continueButton = "xpath===(//*[@resource-id='continue'])[1]";
+	private String passwordField = "xpath===//*[@resource-id='ap_password']";
+	private String logInButton = "xpath===//*[@resource-id='signInSubmit']";
+
 }

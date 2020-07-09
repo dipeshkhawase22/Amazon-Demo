@@ -28,7 +28,6 @@ public abstract class Reporter {
 			{
 				org.testng.Reporter.log("<br>"+desc+"</br>");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,7 +41,6 @@ public abstract class Reporter {
 		}else if(status.toUpperCase().equals("INFO")){
 			this.test.log(LogStatus.INFO, desc);
 		}
-
 	}
 
 	public abstract long takeSnap();
@@ -54,7 +52,6 @@ public abstract class Reporter {
 		}catch(Exception e){
 			System.out.println("exception throwed in startResult method");
 		}
-
 		return extent;
 	}
 
@@ -80,13 +77,11 @@ public abstract class Reporter {
 		}
 	}
 
-
 	public void endTestcase(){
 		try{
 			extent.endTest(test);
 		}catch(Exception e){
 			System.out.println("Exception throwed while endTestcae method");
 		}
-
 	}
 }

@@ -17,6 +17,14 @@ import bindings.GeneralBind;
 
 public class ProductScreen extends AmazonBind {
 
+	private static final String PRODUCT_TITLE = "productTitle";
+	private static final String PRODUCT_REVIEW = "productReview";
+	private static final String PRODUCT_SHARE = "shareProduct";
+	private static final String PRODUCT_IMAGE = "ProductImage";
+	private static final String ADD_TO_CART = "addtoCartButton";
+	private static final String CART_COUNT = "cartCount";
+	private static final String CART_BUTTON = "cartButton";
+
 	private static Properties prop;
 	public Map<String, String> capData1 = new HashMap<String, String>();
 
@@ -29,7 +37,6 @@ public class ProductScreen extends AmazonBind {
 			if (capData1.get("PlatformName").equalsIgnoreCase("Android")) {
 				prop.load(new FileInputStream(new File("./Locators/Android/pdp.properties")));
 			}
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -39,96 +46,99 @@ public class ProductScreen extends AmazonBind {
 
 	//SEARCH PRODUCT
 	public ProductScreen validateSearchResultPage() throws InterruptedException {
-
 		swipeFullFromBottomToTop("android");
-
-		GeneralBind.productNameSearchResults=getText(prop.getProperty("text.prodSearchPageTitle"));
-		String[] fullPrice=getText(prop.getProperty("text.prodSearchPagePrice")).split(" ");
+		GeneralBind.productNameSearchResults=getText(prodSearchPageTitle);
+		String[] fullPrice=getText(prodSearchPagePrice).split(" ");
 		System.out.println("price full : "+fullPrice[0]);
 		System.out.println("name full : "+GeneralBind.productNameSearchResults);
-
 		if(!fullPrice[0].contains("₹"))
 		{
 			org.testng.Assert.assertTrue(false,"₹ not present in search results page");
 		}
 		GeneralBind.productPriceSearchResults=fullPrice[0];
-
 		verifyStep("Product Name search page :"+GeneralBind.productNameSearchResults, "INFO");
 		verifyStep("Product Price search page :"+GeneralBind.productPriceSearchResults, "INFO");
-
-		click(prop.getProperty("text.prodSearchPageTitle"));
+		click(prodSearchPageTitle);
 		return this;
 	}
 
 	public ProductScreen validateProductScreen() {		
-		verifyElementIsDisplayed(prop.getProperty("text.productTitle"));
-		verifyElementIsDisplayed(prop.getProperty("image.productReview"));
-		verifyElementIsDisplayed(prop.getProperty("button.shareProduct"));
-		verifyElementIsDisplayed(prop.getProperty("button.ProductImage"));
-
+		verifyText(PRODUCT_TITLE, productTitle);
+		verifyElementIsDisplayed(productTitle);
+		verifyText(PRODUCT_REVIEW, productReview);
+		verifyElementIsDisplayed(productReview);
+		verifyText(PRODUCT_SHARE, shareProduct);
+		verifyElementIsDisplayed(shareProduct);
+		verifyText(PRODUCT_IMAGE, ProductImage);
+		verifyElementIsDisplayed(ProductImage);
 		verifyStep("Product details page displayed", "PASS");
-
-		String pScreenProductTitle=getText(prop.getProperty("text.productTitle"));
+		String pScreenProductTitle=getText(productTitle);
 		verifyStep("Product name PDP page : "+pScreenProductTitle, "INFO");
-
 		org.testng.Assert.assertEquals(pScreenProductTitle, GeneralBind.productNameSearchResults);
-
 		swipeFullFromBottomToTop("android");
-
-		if(verifyIsDisplayed(prop.getProperty("text.pdpPageSavingsPrice")))
+		if(verifyIsDisplayed(pdpPageSavingsPrice))
 		{
 			GeneralBind.offerProduct=true;
 		}
-
-		String pScreenPrice=getText(prop.getProperty("text.productPrice"));
+		String pScreenPrice=getText(productPrice);
 		pScreenPrice=pScreenPrice.replace("rupees ", "₹");
 		verifyStep("Product price PDP page : "+pScreenPrice, "INFO");
-
 		org.testng.Assert.assertEquals(pScreenPrice, GeneralBind.productPriceSearchResults);
-
-		swipeToElement("android", prop.getProperty("button.wishListButton"));
-
-		if(!verifyIsDisplayed(prop.getProperty("button.addtoCartButton")))
+		swipeToElement("android", wishListButton);
+		if(!verifyIsDisplayed(addtoCartButton))
 		{
-			swipeToElementUpwards("android", prop.getProperty("button.oneTimePurchase"));
-			click(prop.getProperty("button.oneTimePurchase"));
+			swipeToElementUpwards("android", oneTimePurchase);
+			click(oneTimePurchase);
 		}
-
-		swipeToElement("android", prop.getProperty("button.addtoCartButton"));
-
-		GeneralBind.productQuantity=Integer.parseInt(getText(prop.getProperty("text.quantityDropdown")));
-
+		swipeToElement("android", addtoCartButton);
+		GeneralBind.productQuantity=Integer.parseInt(getText(quantityDropdown));
 		verifyStep("Product quantity : "+GeneralBind.productQuantity, "INFO");
-
-		verifyElementIsDisplayed(prop.getProperty("button.addtoCartButton"));
-
+		verifyText(ADD_TO_CART, addtoCartButton);
+		verifyElementIsDisplayed(addtoCartButton);
 		return this;
 	}
 
 	public ProductScreen addToCart() throws InterruptedException {
-
-		verifyElementIsDisplayed(prop.getProperty("text.cartCount"));
-		int cartCountBefore=Integer.parseInt(getText(prop.getProperty("text.cartCount")));
-
-		click(prop.getProperty("button.addtoCartButton"));
-		
-		verifyElementIsDisplayed(prop.getProperty("text.cartCount"));
-		int cartCountAfter=Integer.parseInt(getText(prop.getProperty("text.cartCount")));
-
+		verifyText(CART_COUNT, cartCount);
+		verifyElementIsDisplayed(cartCount);
+		int cartCountBefore=Integer.parseInt(getText(cartCount));
+		click(addtoCartButton);
+		verifyElementIsDisplayed(cartCount);
+		int cartCountAfter=Integer.parseInt(getText(cartCount));
 		if(cartCountBefore+GeneralBind.productQuantity==cartCountAfter)
 		{
 			System.out.println("Product added to cart");
 		}
-
 		return this;
 	}
 
 	public ProductScreen navigateToShoppingCart() {
-
-		verifyElementIsDisplayed(prop.getProperty("button.cartButton"));
-		click(prop.getProperty("button.cartButton"));
-
+		verifyText(CART_BUTTON, cartButton);
+		verifyElementIsDisplayed(cartButton);
+		click(cartButton);
 		return this;
 	}
 
+	private String productTitle = "xpath===//*[@resource-id='title_feature_div']//android.view.View";
+	private String productReview = "xpath===//*[@resource-id='acrCustomerReviewLink']";
+	private String shareProduct = "xpath===//*[@resource-id='swf-share-icon-container']";
+	private String ProductImage = "xpath===//*[@resource-id='image-block-row']";
+	private String productPrice = "xpath===//*[@resource-id='atfRedesign_priceblock_priceToPay']//android.widget.EditText";
+	private String OfferTableBox = "xpath===//*[@resource-id='soppInsidePrimary_feature_div']";
+	private String quantityDropdown = "xpath===//*[@resource-id='mobileQuantityDropDown']";
+	private String BuyNowButton = "xpath===//*[@resource-id='a-autoid-1']";
+	private String addtoCartButton = "xpath===//*[@resource-id='add-to-cart-button']";
+	private String wishListButton = "xpath===//*[@resource-id='add-to-wishlist-button-submit']";
+	private String cartButton = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_image";
+	private String oneTimePurchase = "xpath===//*[@resource-id='oneTimeBuyBox']";
+	private String pdpPageSavingsPrice = "xpath===//*[@resource-id='atfRedesign_buyingPrice_savings']";
+	private String prodSearchPageTitle = "xpath===(((//*[@resource-id='com.amazon.mShop.android.shopping:id/list_product_description_layout'])[2]//android.widget.LinearLayout)[1]//android.widget.TextView)[1]";
+	private String prodSearchPagePrice = "xpath===((//*[@resource-id='com.amazon.mShop.android.shopping:id/list_product_description_layout'])[2]//android.widget.LinearLayout)[2]//android.view.ViewGroup//android.widget.TextView";
+	private String cartCount = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_count";
+	private String productSearchImage = "com.amazon.mShop.android.shopping:id/rs_results_image";
+	private String productSearchTitle = "com.amazon.mShop.android.shopping:id/item_title";
+	private String productSearchPrice = "//*[@resource-id='com.amazon.mShop.android.shopping:id/rs_results_styled_price_v2']//android.widget.TextView";
+	private String searchBar = "id===com.amazon.mShop.android.shopping:id/rs_search_src_text";
+	private String searchResult1 = "xpath===(//*[@resource-id='com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_text'])[1]";
+	private String searchListPageImage1 = "xpath===(//*[@resource-id='com.amazon.mShop.android.shopping:id/rs_results_image'])[1]";
 }

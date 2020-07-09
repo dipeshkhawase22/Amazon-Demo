@@ -18,10 +18,25 @@ import basePages.HomeScreen;
 import utilities.ExcelMaker;
 
 public class HomeScreen extends AmazonBind {
-	
+
+	private static final String LANGUAGE_SELECTION = "languageSelectionPopUp";
+	private static final String ENGLISH_SETTINGS = "languageEnglishSettings";
+	private static final String SAVE_CHANGES = "saveChangesButton";
+	private static final String AMAZON_LOGO = "amazonHomeLogo";
+	private static final String MIC_BUTTON = "microphoneButton";
+	private static final String LOCATION_SELECTION = "locationSelection";
+	private static final String MENU_BUTTON = "menuButton";
+	private static final String TEXT_HELLO = "helloText";
+	private static final String HOME_BUTTON = "homeButton";
+	private static final String SEARCH_BAR = "searchBar";
+	private static final String SEARCH_RESULT = "searchResult1";
+	private static final String SEARCH_LIST = "searchListPageImage1";
+	private static final String CART_BUTTON = "cartButton";
+	private static final String CART_COUNT = "cartCount";
+	private static final String DELETE_BUTTON = "deleteButton";
+
 	private static Properties prop;
 	public Map<String, String> capData1 = new HashMap<String, String>();
-
 
 	public HomeScreen(MobileDriver<?> driver, ExtentTest test, Map<String, String> capData1) {
 		this.driver = driver;
@@ -32,7 +47,6 @@ public class HomeScreen extends AmazonBind {
 			if (capData1.get("PlatformName").equalsIgnoreCase("Android")) {
 				prop.load(new FileInputStream(new File("./Locators/Android/homePage.properties")));
 			}
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -40,107 +54,107 @@ public class HomeScreen extends AmazonBind {
 		}
 	}
 
-
 	public HomeScreen selectLanguage() {
-		verifyElementIsDisplayed(prop.getProperty("text.languageSelectionPopUp"));
-		verifyElementIsDisplayed(prop.getProperty("radio.languageEnglishSettings"));
-		click(prop.getProperty("radio.languageEnglishSettings"));
-		verifyElementIsDisplayed(prop.getProperty("button.saveChangesButton"));
-		click(prop.getProperty("button.saveChangesButton"));
+		verifyText(LANGUAGE_SELECTION, languageSelectionPopUp);
+		verifyElementIsDisplayed(languageSelectionPopUp);
+		verifyText(ENGLISH_SETTINGS, languageEnglishSettings);
+		verifyElementIsDisplayed(languageEnglishSettings);
+		click(languageEnglishSettings);
+		verifyText(SAVE_CHANGES, saveChangesButton);
+		verifyElementIsDisplayed(saveChangesButton);
+		click(saveChangesButton);
 		return this;
 	}
-	
+
 	public HomeScreen validateHomePage() {
-		verifyElementIsDisplayed(prop.getProperty("image.amazonHomeLogo"));
-		verifyElementIsDisplayed(prop.getProperty("button.microphoneButton"));
-    	verifyElementIsDisplayed(prop.getProperty("button.locationSelection"));   
+		verifyText(AMAZON_LOGO, amazonHomeLogo);
+		verifyElementIsDisplayed(amazonHomeLogo);
+		verifyText(MIC_BUTTON, microphoneButton);
+		verifyElementIsDisplayed(microphoneButton);
+		verifyText(LOCATION_SELECTION, locationSelection);
+		verifyElementIsDisplayed(locationSelection);   
 		verifyStep("Home Page Validated", "PASS");
-
 		return this;
 	}
 
-		public HomeScreen validateLogin() {
-		
+	public HomeScreen validateLogin() {
 		ExcelMaker excelFetch = new ExcelMaker();
 		Map<String, String> signinDetailsMap = excelFetch.getDataFromExcel("Login_And_Place_Order_TC01", "account1");
-
-		verifyElementIsDisplayed(prop.getProperty("button.menuButton"));
-		click(prop.getProperty("button.menuButton"));
-		
-		verifyElementIsDisplayed(prop.getProperty("text.helloText"));
-		
+		verifyText(MENU_BUTTON, menuButton);
+		verifyElementIsDisplayed(menuButton);
+		click(menuButton);
+		verifyText(TEXT_HELLO, helloText);
+		verifyElementIsDisplayed(helloText);
 		verifyStep("Logged in successfully", "PASS");
-
-		String actualName=getText(prop.getProperty("text.helloText"));
+		String actualName=getText(helloText);
 		actualName=actualName.replace("Hello, ", "");
-        String expectedName=signinDetailsMap.get("Name");
-        
-        Assert.assertEquals(actualName, expectedName);
-        
-    	verifyElementIsDisplayed(prop.getProperty("button.homeButton"));
-		click(prop.getProperty("button.homeButton"));
-        
-		
+		String expectedName=signinDetailsMap.get("Name");
+		Assert.assertEquals(actualName, expectedName);
+		verifyText(HOME_BUTTON, homeButton);
+		verifyElementIsDisplayed(homeButton);
+		click(homeButton);
 		return this;
 	}
 
-		public HomeScreen searchProduct() throws InterruptedException {
-
+	public HomeScreen searchProduct() throws InterruptedException {
 		ExcelMaker excelFetch = new ExcelMaker();
 		Map<String, String> searchData = excelFetch.getDataFromExcel("Login_And_Place_Order_TC01", "account1");
-		
-		verifyElementIsDisplayed(prop.getProperty("edit.searchBar"));
-		click(prop.getProperty("edit.searchBar"));
-		
-		
-		verifyElementIsDisplayed(prop.getProperty("edit.searchBar"));
-		enterText(prop.getProperty("edit.searchBar"), searchData.get("SearchTerm"));
-		
+		verifyText(SEARCH_BAR, searchBar);
+		verifyElementIsDisplayed(searchBar);
+		click(searchBar);
+		verifyElementIsDisplayed(searchBar);
+		enterText(searchBar, searchData.get("SearchTerm"));
 		verifyStep("Product searched", "PASS");
-
-		
-		verifyElementIsDisplayed(prop.getProperty("text.searchResult1"));
-		click(prop.getProperty("text.searchResult1"));
-		
-		
-		verifyElementIsDisplayed(prop.getProperty("image.searchListPageImage1"));
-		
-		
+		verifyText(SEARCH_RESULT, searchResult1);
+		verifyElementIsDisplayed(searchResult1);
+		click(searchResult1);
+		verifyText(SEARCH_LIST, searchListPageImage1);
+		verifyElementIsDisplayed(searchListPageImage1);
 		return this;
 	}
-	
 
 	public HomeScreen clearCart() throws InterruptedException {
-
-		
-		verifyElementIsDisplayed(prop.getProperty("text.cartCount"));
+		verifyText(CART_COUNT, cartCount);
+		verifyElementIsDisplayed(cartCount);
 		int cartCount=Integer.parseInt(getText(prop.getProperty("text.cartCount")));
-		
 		if(cartCount>0)
 		{
 			System.out.println("Deleting cart items");
-			verifyElementIsDisplayed(prop.getProperty("button.cartButton"));
-			click(prop.getProperty("button.cartButton"));
-			
-			verifyElementIsDisplayed(prop.getProperty("button.deleteButton"));
-			click(prop.getProperty("button.deleteButton"));
-			
-			//verifyElementIsDisplayed(prop.getProperty("text.ProductRemovedConfirmation"));
-			
+			verifyText(CART_BUTTON, cartButton);
+			verifyElementIsDisplayed(cartButton);
+			click(cartButton);
+			verifyText(DELETE_BUTTON, deleteButton);
+			verifyElementIsDisplayed(deleteButton);
+			click(deleteButton);
+			//verifyElementIsDisplayed(ProductRemovedConfirmation);
 			int cartCountUpdated=Integer.parseInt(getText(prop.getProperty("text.cartCount")));
-
 			if(cartCountUpdated==0)
 			{
 				System.out.println("cart items deleted successfully");
-				
 				verifyStep("Cart items deleted", "PASS");
-
 			}		
 		}
-		verifyElementIsDisplayed(prop.getProperty("image.amazonHomeLogo"));
-		click(prop.getProperty("image.amazonHomeLogo"));
-		
+		verifyText(AMAZON_LOGO, amazonHomeLogo);
+		verifyElementIsDisplayed(amazonHomeLogo);
+		click(amazonHomeLogo);
 		return this;
 	}
-		
+
+	private String amazonHomeLogo = "id===com.amazon.mShop.android.shopping:id/action_bar_home_logo";
+	private String microphoneButton = "id===com.amazon.mShop.android.shopping:id/voice_btn_icon";
+	private String locationSelection = "id===com.amazon.mShop.android.shopping:id/glow_subnav_label";
+	private String languageSelectionPopUp = "xpath===//*[@resource-id='lop-select']";
+	private String languageEnglishSettings = "xpath===//*[@text='English - EN']";
+	private String saveChangesButton = "xpath===//*[@text='Save Changes']";
+	private String menuButton = "id===com.amazon.mShop.android.shopping:id/action_bar_burger_icon";
+	private String helloText = "id===com.amazon.mShop.android.shopping:id/gno_greeting_text_view";
+	private String homeButton = "id===com.amazon.mShop.android.shopping:id/web_home_shop_by_department_label";
+	private String cartButton = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_image";
+	private String deleteButton = "xpath===(//*[@text='Delete'])[2]";
+	private String ProductRemovedConfirmation = "xpath===/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.view.View";
+	private String cartCount = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_count";
+	private String searchBar = "id===com.amazon.mShop.android.shopping:id/rs_search_src_text";
+	private String searchResult1 = "xpath===(//*[@resource-id='com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_text'])[1]";
+	private String searchListPageImage1 = "xpath===(//*[@resource-id='com.amazon.mShop.android.shopping:id/rs_results_image'])[1]";
+
 }

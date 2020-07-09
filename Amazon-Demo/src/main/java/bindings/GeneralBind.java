@@ -32,22 +32,20 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import utilities.Reporter;
 
 public class GeneralBind extends Reporter {
-
+	
 	public MobileDriver driver;
 	protected Properties prop;
 	public Map<String, String> capData = new HashMap<String, String>();
-
 	public static String productNameSearchResults="";
 	public static String productPriceSearchResults="";
 	public static int productQuantity;
 	public static boolean offerProduct=false;
-	
 
 	public GeneralBind(MobileDriver driver, ExtentTest test) {
 		this.driver = driver;
 		this.test = test;
 	}
-	
+
 	public GeneralBind () {} 
 
 	//StartApp
@@ -61,26 +59,18 @@ public class GeneralBind extends Reporter {
 	public void closeApp() {
 		try {
 			driver.closeApp();
-		}catch (Exception exp) {
-
-		}
+		}catch (Exception exp) {}
 	}
 
 	public void invokeApp() {
-
 		System.out.println(" Launching Application... ");
-
 		URL url = null;
 		DesiredCapabilities caps = new DesiredCapabilities();
-
 		try {		
 			String dir = System.getProperty("user.dir");
 			url = new URL("http://" + "127.0.0.1" + ":" + capData.get("Port") + "/wd/hub");
-
 			switch (capData.get("PlatformName").toLowerCase()) {
-
 			case "android":
-
 				caps.setCapability(MobileCapabilityType.PLATFORM_NAME, capData.get("PlatformName"));
 				caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, capData.get("PlatformVersion"));
 				caps.setCapability(MobileCapabilityType.DEVICE_NAME, capData.get("DeviceName"));
@@ -96,10 +86,9 @@ public class GeneralBind extends Reporter {
 
 			default:
 				break;
-
 			}
-
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -112,11 +101,10 @@ public class GeneralBind extends Reporter {
 			element = (MobileElement) driver.findElement(byProperty);
 			driver.findElement(byProperty).click();
 			System.out.println("Element is Clicked");
-
-		}  catch (Exception e) {
+		}  
+		catch (Exception e) {
 			Assert.assertTrue(false, e.getMessage());
 		}
-
 	}
 
 	public void enterText(String property, String data) {
@@ -142,7 +130,6 @@ public class GeneralBind extends Reporter {
 		} catch (Exception e) {
 			Assert.assertTrue(false, e.getMessage());
 		}
-
 	}
 
 	public boolean verifyText(String property, String text) {
@@ -154,7 +141,7 @@ public class GeneralBind extends Reporter {
 			sText = element.getText();
 			if (sText.equalsIgnoreCase(text)) {
 				val= true;
-			} 
+			}
 		}
 		catch (Exception e) {
 			SoftAssert softAssert = new SoftAssert();
@@ -169,7 +156,8 @@ public class GeneralBind extends Reporter {
 			driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 			element = (MobileElement) driver.findElement(getLocator(property));
 			element.isDisplayed();
-		}catch (Exception e) {
+		}
+		catch (Exception e) {
 			Assert.assertTrue(false, "Element not displayed\n" + e.getMessage());
 		} 
 	}
@@ -181,8 +169,8 @@ public class GeneralBind extends Reporter {
 			element = (MobileElement) driver.findElement(getLocator(property));
 			element.isDisplayed();
 			present=true;
-
-		}catch (Exception e) {
+		}
+		catch (Exception e) {
 			present=false;		} 
 		return present;
 	}
@@ -203,7 +191,6 @@ public class GeneralBind extends Reporter {
 		{
 			Assert.assertTrue(false, property + "Element not found\n" + e.getMessage());
 		}
-
 		catch (TimeoutException e) {
 			Assert.assertTrue(false, property + "Time out error\n" + e.getMessage());
 		}
@@ -233,22 +220,25 @@ public class GeneralBind extends Reporter {
 			}
 			Assert.assertTrue(true, property + " is displayed or not validation");
 
-		} catch (ElementNotFoundException e) {
+		} 
+		catch (ElementNotFoundException e) {
 			Assert.assertTrue(true, property + "Element not found\n" + e.getMessage());
-		} catch (TimeoutException e) {
+		} 
+		catch (TimeoutException e) {
 			Assert.assertTrue(false, property + "Time out error\n" + e.getMessage());
-		} catch (ElementNotSelectableException e) {
+		} 
+		catch (ElementNotSelectableException e) {
 			Assert.assertTrue(false, getLocator(property) + "Element not Selectable\n" + e.getMessage());
-		} catch (ElementNotVisibleException e) {
+		} 
+		catch (ElementNotVisibleException e) {
 			Assert.assertTrue(false, property + "Element not Visible\n" + e.getMessage());
-		} catch (ElementNotInteractableException e) {
+		} 
+		catch (ElementNotInteractableException e) {
 			Assert.assertTrue(false, property + "Element not Interatable\n" + e.getMessage());
 		}
-
 		catch (Exception e) {
 			Assert.assertTrue(false, e.getMessage());
 		}
-
 	}
 
 	public String getText(String property) {
@@ -257,15 +247,20 @@ public class GeneralBind extends Reporter {
 		try {
 			element = (MobileElement) driver.findElement(getLocator(property));
 			return element.getText();
-		} catch (ElementNotFoundException e) {
+		} 
+		catch (ElementNotFoundException e) {
 			Assert.assertTrue(false, element + "Element not found\n" + e.getMessage());
-		} catch (TimeoutException e) {
+		} 
+		catch (TimeoutException e) {
 			Assert.assertTrue(false, element + "Time out error\n" + e.getMessage());
-		} catch (ElementNotSelectableException e) {
+		} 
+		catch (ElementNotSelectableException e) {
 			Assert.assertTrue(false, element + "Element not Selectable\n" + e.getMessage());
-		} catch (ElementNotVisibleException e) {
+		} 
+		catch (ElementNotVisibleException e) {
 			Assert.assertTrue(false, element + "Element not Visible\n" + e.getMessage());
-		} catch (ElementNotInteractableException e) {
+		} 
+		catch (ElementNotInteractableException e) {
 			Assert.assertTrue(false, element + "Element not Interatable\n" + e.getMessage());
 		}
 		catch (Exception e) {
@@ -276,31 +271,29 @@ public class GeneralBind extends Reporter {
 
 	public String getAttribute(String property, String attribute) {
 		String bReturn = "";
-
 		MobileElement element = null;
-
 		try {
 			element = (MobileElement) driver.findElement(getLocator(property));
 			return element.getAttribute(attribute);
-		} catch (ElementNotFoundException e) {
+		} 
+		catch (ElementNotFoundException e) {
 			Assert.assertTrue(false, element + "Element not found\n" + e.getMessage());
-		} catch (TimeoutException e) {
+		} 
+		catch (TimeoutException e) {
 			Assert.assertTrue(false, element + "Time out error\n" + e.getMessage());
-		} catch (ElementNotSelectableException e) {
+		} 
+		catch (ElementNotSelectableException e) {
 			Assert.assertTrue(false, element + "Element not Selectable\n" + e.getMessage());
-		} catch (ElementNotVisibleException e) {
-
+		} 
+		catch (ElementNotVisibleException e) {
 			Assert.assertTrue(false, element + "Element not Visible\n" + e.getMessage());
-		} catch (ElementNotInteractableException e) {
-
+		} 
+		catch (ElementNotInteractableException e) {
 			Assert.assertTrue(false, element + "Element not Interatable\n" + e.getMessage());
 		}
-
 		catch (Exception e) {
-
 			Assert.assertTrue(false, e.getMessage());
 		}
-
 		return bReturn;
 	}
 
@@ -310,9 +303,10 @@ public class GeneralBind extends Reporter {
 		try {
 			FileUtils.copyFile(((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE),
 					new File("./reports/images/" + number + ".jpg"));
-		} catch (IOException e) {
-		} catch (Exception e) {
-
+		} 
+		catch (IOException e) {
+		} 
+		catch (Exception e) {
 			System.out.println("The app has been closed.");
 		}
 		return number;
@@ -321,7 +315,6 @@ public class GeneralBind extends Reporter {
 	//Locator
 	public By getLocator(String property) {
 		String locator = property;
-
 		String locatorType = locator.split("===")[0];
 		String locatorValue = locator.split("===")[1];
 
@@ -335,7 +328,6 @@ public class GeneralBind extends Reporter {
 			return By.className(locatorValue);
 		else if (locatorType.toLowerCase().equals("xpath"))
 			return By.xpath(locatorValue);
-
 		else
 			return null;
 	}
@@ -347,25 +339,26 @@ public class GeneralBind extends Reporter {
 		try {
 			element = (MobileElement) driver.findElement(getLocator(property));
 			value = driver.findElement(getLocator(property)).isSelected();
-
-		} catch (ElementNotFoundException e) {
+		} 
+		catch (ElementNotFoundException e) {
 			Assert.assertTrue(false, element + "Element not found\n" + e.getMessage());
-		} catch (TimeoutException e) {
+		} 
+		catch (TimeoutException e) {
 			Assert.assertTrue(false, element + "Time out error\n" + e.getMessage());
-		} catch (ElementNotSelectableException e) {
+		} 
+		catch (ElementNotSelectableException e) {
 			Assert.assertTrue(false, element + "Element not Selectable\n" + e.getMessage());
-		} catch (ElementNotVisibleException e) {
+		} 
+		catch (ElementNotVisibleException e) {
 			Assert.assertTrue(false, element + "Element not Visible\n" + e.getMessage());
-		} catch (ElementNotInteractableException e) {
+		} 
+		catch (ElementNotInteractableException e) {
 			Assert.assertTrue(false, element + "Element not Interatable\n" + e.getMessage());
 		}
-
 		catch (Exception e) {
 			Assert.assertTrue(false, e.getMessage());
 		}
-
 		return value;
-
 	}
 
 	public void keypadDown() {
@@ -396,7 +389,6 @@ public class GeneralBind extends Reporter {
 		catch (Exception e) {
 			Assert.assertTrue(false,e.getMessage());
 		}
-
 	}
 
 	public void swipeFullFromBottomToTop(String pfName) {
@@ -410,29 +402,24 @@ public class GeneralBind extends Reporter {
 			if (pfName.equalsIgnoreCase("android")) {
 				((AndroidDriver<WebElement>) driver).swipe(startx, endy, startx, starty, 1000);
 			} 
-
-		} catch (InterruptedException e) {
+		} 
+		catch (InterruptedException e) {
 			Assert.assertTrue(false,e.getMessage());
 		}
 	}
 
 	public boolean verifyElement(String property) {
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
 		boolean present = true;
 		try {
-
-
 			driver.findElement(getLocator(property));
 			return present;
-
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			present = false;
 			return present;
 		}
-
 	}
-
 
 	public void swipeToElement(String pfName, String property) {
 		while (true) {
@@ -444,7 +431,6 @@ public class GeneralBind extends Reporter {
 	}
 
 	public void swipeFullFromTopToBottom(String pfName) {
-
 		try {
 			Thread.sleep(2000);
 			org.openqa.selenium.Dimension scrnSize = driver.manage().window().getSize();
@@ -453,14 +439,12 @@ public class GeneralBind extends Reporter {
 			int starty = (int) (scrnSize.height * 0.2);
 			// int endx = (int) (scrnSize.width /2);
 			if (pfName.equalsIgnoreCase("android")) {
-
 				((AndroidDriver<WebElement>) driver).swipe(startx, starty, startx, endy, 3000);
 			} 
-
-		} catch (InterruptedException e) {
+		} 
+		catch (InterruptedException e) {
 			Assert.assertTrue(false,e.getMessage());
 		}
-
 	}
 
 	public void swipeToElementUpwards(String pfName, String property) {
@@ -470,7 +454,6 @@ public class GeneralBind extends Reporter {
 			}
 			swipeFullFromTopToBottom(pfName);
 		}
-
 	}
 
 	//LAUNCH APP
@@ -480,9 +463,6 @@ public class GeneralBind extends Reporter {
 	}
 
 	public void clickAndroidBack() {
-
 		((AndroidDriver) driver).pressKeyCode(AndroidKeyCode.BACK);
-
 	}
-
 }

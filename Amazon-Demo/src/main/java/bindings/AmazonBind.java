@@ -15,34 +15,33 @@ import com.relevantcodes.extentreports.ExtentTest;
 import io.appium.java_client.MobileDriver;
 
 public class AmazonBind extends GeneralBind implements ITestListener {
-	
+
 	public String dataSheetName;
 	public String applicationType;
 
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {
-		startResult();
-		
+		startResult();		
 	}
+
 	@BeforeMethod(alwaysRun = true)
 	public void beforeMethod() {
 		invokeApp();
-
 	}
+
 	@AfterMethod()
 	public void afterMethod(ITestResult result) throws IOException {
 		if(!result.isSuccess())
 		{
-		    String testResult = String.valueOf(result.getThrowable());
+			String testResult = String.valueOf(result.getThrowable());
 			verifyStep(testResult, "FAIL");
 		}
 		endTestcase();
 	}
+	
 	@AfterSuite(alwaysRun = true)
 	public void afterSuite() {
 		endResult();
 		closeApp();
-
 	}
-
 }
