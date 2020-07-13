@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <parameter name="PlatformName" value="param-val-not-found"/>
+  <parameter name="PlatformVersion" value="param-val-not-found"/>
+  <parameter name="Automation" value="param-val-not-found"/>
+  <parameter name="Port" value="param-val-not-found"/>
+  <parameter name="udid" value="param-val-not-found"/>
+  <parameter name="Application" value="param-val-not-found"/>
+  <parameter name="DeviceName" value="param-val-not-found"/>
+  <parameter name="systemPort" value="param-val-not-found"/>
   <test thread-count="5" name="Default test(failed)">
     <classes>
       <class name="tests.AmazonTests">

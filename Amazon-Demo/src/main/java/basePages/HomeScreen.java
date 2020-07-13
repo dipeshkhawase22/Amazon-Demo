@@ -116,7 +116,7 @@ public class HomeScreen extends AmazonBind {
 	public HomeScreen clearCart() throws InterruptedException {
 		verifyText(CART_COUNT, cartCount);
 		verifyElementIsDisplayed(cartCount);
-		int cartCount=Integer.parseInt(getText(prop.getProperty("text.cartCount")));
+		int cartCount=Integer.parseInt(getText("cartCount"));
 		if(cartCount>0)
 		{
 			System.out.println("Deleting cart items");
@@ -127,7 +127,7 @@ public class HomeScreen extends AmazonBind {
 			verifyElementIsDisplayed(deleteButton);
 			click(deleteButton);
 			//verifyElementIsDisplayed(ProductRemovedConfirmation);
-			int cartCountUpdated=Integer.parseInt(getText(prop.getProperty("text.cartCount")));
+			int cartCountUpdated=Integer.parseInt(getText("cartCount"));
 			if(cartCountUpdated==0)
 			{
 				System.out.println("cart items deleted successfully");

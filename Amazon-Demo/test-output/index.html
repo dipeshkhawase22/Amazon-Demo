@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Default_suite">
-              <span class="suite-name border-skipped">Default suite</span>
+              <span class="suite-name border-failed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
-                    <span>C:\Users\Dipesh\AppData\Local\Temp\testng-eclipse--150273442\testng-customsuite.xml</span>
+                    <span>C:\Users\Dipesh\AppData\Local\Temp\testng-eclipse-1345892060\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -91,21 +91,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,  1 skipped,  </span>
+                    <span class="method-stats">1 method, 1 failed,   </span>
                   </li>
                   <li>
-                    <span class="method-list-title skipped">Skipped methods</span>
-                    <span class="show-or-hide-methods skipped">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
                     </span>
-                    <div class="method-list-content skipped suite-Default_suite">
+                    <div class="method-list-content failed suite-Default_suite">
                       <span>
-                        <img width="3%" src="skipped.png"/>
+                        <img width="3%" src="failed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="tests.AmazonTests" hash-for-method="Amazon_Login_And_Place_Order_TC001">Amazon_Login_And_Place_Order_TC001</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content skipped suite-Default_suite -->
+                    </div> <!-- method-list-content failed suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -117,9 +117,9 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-skipped">
+          <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="skipped.png"/>
+              <img src="failed.png"/>
               <span class="class-name">tests.AmazonTests</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -128,16 +128,26 @@
                   <a name="Amazon_Login_And_Place_Order_TC001">
                   </a> <!-- Amazon_Login_And_Place_Order_TC001 -->
                   <span class="method-name">Amazon_Login_And_Place_Order_TC001</span>
-                  <div class="stack-trace">org.testng.TestNGException: 
-Parameter &apos;Automation&apos; is required by BeforeClass on method setData but has not been marked @Optional or defined
-in C:\Users\Dipesh\AppData\Local\Temp\testng-eclipse--150273442\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParams(Parameters.java:272)
-	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:360)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:704)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:166)
-	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:283)
-	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:176)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+                  <div class="stack-trace">java.lang.AssertionError: Element not displayed
+null expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:97)
+	at org.testng.Assert.failNotEquals(Assert.java:969)
+	at org.testng.Assert.assertTrue(Assert.java:43)
+	at bindings.GeneralBind.verifyElementIsDisplayed(GeneralBind.java:161)
+	at basePages.LoginScreen.signIn(LoginScreen.java:45)
+	at tests.AmazonTests.Amazon_Login_And_Place_Order_TC001(AmazonTests.java:49)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:134)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:597)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:816)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
 	at java.util.ArrayList.forEach(Unknown Source)
 	at org.testng.TestRunner.privateRun(TestRunner.java:766)
 	at org.testng.TestRunner.run(TestRunner.java:587)
@@ -159,17 +169,25 @@ in C:\Users\Dipesh\AppData\Local\Temp\testng-eclipse--150273442\testng-customsui
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-skipped -->
+          </div> <!-- suite-Default_suite-class-failed -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Dipesh\AppData\Local\Temp\testng-eclipse--150273442\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\Dipesh\AppData\Local\Temp\testng-eclipse-1345892060\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default suite&quot;&gt;
+  &lt;parameter name=&quot;PlatformName&quot; value=&quot;param-val-not-found&quot;/&gt;
+  &lt;parameter name=&quot;PlatformVersion&quot; value=&quot;param-val-not-found&quot;/&gt;
+  &lt;parameter name=&quot;Automation&quot; value=&quot;param-val-not-found&quot;/&gt;
+  &lt;parameter name=&quot;Port&quot; value=&quot;param-val-not-found&quot;/&gt;
+  &lt;parameter name=&quot;udid&quot; value=&quot;param-val-not-found&quot;/&gt;
+  &lt;parameter name=&quot;Application&quot; value=&quot;param-val-not-found&quot;/&gt;
+  &lt;parameter name=&quot;DeviceName&quot; value=&quot;param-val-not-found&quot;/&gt;
+  &lt;parameter name=&quot;systemPort&quot; value=&quot;param-val-not-found&quot;/&gt;
   &lt;test thread-count=&quot;5&quot; verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;tests.AmazonTests&quot;/&gt;
@@ -216,12 +234,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'Amazon_Login_And_Place_Order_TC001')
 data.setCell(0, 2, 'tests.AmazonTests')
-data.setCell(0, 3, 0);
+data.setCell(0, 3, 107);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 0 ms</span>
+              <span class="suite-total-time">Total running time: 107 ms</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -232,6 +250,12 @@ return data;
             <span class="header-content">Reporter output for Default suite</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">Amazon_Login_And_Place_Order_TC001</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output"><br>App launched</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg' height='300' width='200'/> </a><br></span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
@@ -252,21 +276,27 @@ return data;
                 <span class="method-name">beforeSuite</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
+              <div class="configuration-class before">
+                <span class="method-name">setData(param-val-not-found, param-val-not-found, param-val-not-found, param-val-not-found, param-val-not-fo...)</span>
+                <span class="method-start">632 ms</span>
+              </div> <!-- configuration-class before -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod</span>
-                <span class="method-start">1847 ms</span>
+                <span class="method-start">658 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
+                <img src="failed.png">
+                </img>
                 <span class="method-name">Amazon_Login_And_Place_Order_TC001</span>
-                <span class="method-start">1919 ms</span>
+                <span class="method-start">680 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">afterMethod</span>
-                <span class="method-start">1930 ms</span>
+                <span class="method-name">afterMethod([TestResult name=Amazon_Login_And_Place_Order_TC001 status=FAILURE method=AmazonTests.Amazon_Login_A...)</span>
+                <span class="method-start">816 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-suite after">
                 <span class="method-name">afterSuite</span>
-                <span class="method-start">2104 ms</span>
+                <span class="method-start">949 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

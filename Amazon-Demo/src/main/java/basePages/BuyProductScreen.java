@@ -115,7 +115,7 @@ public class BuyProductScreen extends AmazonBind{
 	public BuyProductScreen selectPayment() {
 		ExcelMaker excelFetch = new ExcelMaker();
 		Map<String, String> cvvData = excelFetch.getDataFromExcel("Login_And_Place_Order_TC01", "account1");
-		swipeFullFromBottomToTop("android");		
+		swipeFullFromBottomToTop(p1);		
 		if(!verifyIsDisplayed(cVVEnterField))
 		{
 			verifyElementIsDisplayed(paymentCardSelect);
@@ -124,7 +124,7 @@ public class BuyProductScreen extends AmazonBind{
 		verifyText(CVV, cVVEnterField);
 		verifyElementIsDisplayed(cVVEnterField);
 		enterText(cVVEnterField, cvvData.get("Cvv"));
-		swipeToElement("android",continueButton);
+		swipeToElement(p1,continueButton);
 		verifyElementIsDisplayed(continueButton);
 		click(continueButton);
 		return this;
@@ -142,7 +142,7 @@ public class BuyProductScreen extends AmazonBind{
 	//VALIDATE PRICE BREAKDOWN
 	public BuyProductScreen validateCheckoutPage() throws InterruptedException {
 		verifyStep("Checkout page displayed", "PASS");
-		swipeFullFromBottomToTop("android");
+		swipeFullFromBottomToTop(p1);
 		verifyText(CHECKOUT_PRICE_TOTAL, checkoutTotalPrice);
 		verifyElementIsDisplayed(checkoutTotalPrice);
 		String totalPriceFull=getText(checkoutTotalPrice);
@@ -165,9 +165,9 @@ public class BuyProductScreen extends AmazonBind{
 		int prodQuant;
 		if(GeneralBind.offerProduct)
 		{
-			swipeToElement("android", ProductQuantityCheckout);
+			swipeToElement(p1, ProductQuantityCheckout);
 			System.out.println("offer product");
-			swipeFullFromBottomToTop("android");
+			swipeFullFromBottomToTop(p1);
 			verifyText(CHECKOUT_OFFER_TITLE, ProductTitleCheckoutOfferProduct);
 			verifyElementIsDisplayed(ProductTitleCheckoutOfferProduct);
 			prodNameCheckout=getText(ProductTitleCheckoutOfferProduct);
@@ -177,9 +177,9 @@ public class BuyProductScreen extends AmazonBind{
 			prodPriceShopCart="₹"+prodPriceShopCartFull[0];
 		}
 		else{
-			swipeToElement("android", ProductQuantityCheckout);
+			swipeToElement(p1, ProductQuantityCheckout);
 			System.out.println("non offer product : ");
-			swipeFullFromBottomToTop("android");
+			swipeFullFromBottomToTop(p1);
 			verifyText(PRODUCT_CHECKOUT_TITLE, ProductTitleCheckout);
 			verifyElementIsDisplayed(ProductTitleCheckout);
 			prodNameCheckout=getText(ProductTitleCheckout);

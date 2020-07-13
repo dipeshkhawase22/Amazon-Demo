@@ -40,6 +40,8 @@ public class GeneralBind extends Reporter {
 	public static String productPriceSearchResults="";
 	public static int productQuantity;
 	public static boolean offerProduct=false;
+	public String p1 = "android";
+	//public String p2 = "iOS";
 
 	public GeneralBind(MobileDriver driver, ExtentTest test) {
 		this.driver = driver;
@@ -132,7 +134,7 @@ public class GeneralBind extends Reporter {
 		}
 	}
 
-	public boolean verifyText(String property, String text) {
+	public boolean verifyText(String text, String property) {
 		MobileElement element = null;
 		String sText = "";
 		boolean val=false;
@@ -399,7 +401,7 @@ public class GeneralBind extends Reporter {
 			int startx = (int) (scrnSize.width / 2);
 			int starty = (int) (scrnSize.height*0.3);
 			int endy = (int) (scrnSize.height*0.8);
-			if (pfName.equalsIgnoreCase("android")) {
+			if (pfName.equalsIgnoreCase(p1)) {
 				((AndroidDriver<WebElement>) driver).swipe(startx, endy, startx, starty, 1000);
 			} 
 		} 
@@ -438,7 +440,7 @@ public class GeneralBind extends Reporter {
 			int endy = (int) (scrnSize.height - 1);
 			int starty = (int) (scrnSize.height * 0.2);
 			// int endx = (int) (scrnSize.width /2);
-			if (pfName.equalsIgnoreCase("android")) {
+			if (pfName.equalsIgnoreCase(p1)) {
 				((AndroidDriver<WebElement>) driver).swipe(startx, starty, startx, endy, 3000);
 			} 
 		} 

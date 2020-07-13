@@ -46,7 +46,7 @@ public class ProductScreen extends AmazonBind {
 
 	//SEARCH PRODUCT
 	public ProductScreen validateSearchResultPage() throws InterruptedException {
-		swipeFullFromBottomToTop("android");
+		swipeFullFromBottomToTop(p1);
 		GeneralBind.productNameSearchResults=getText(prodSearchPageTitle);
 		String[] fullPrice=getText(prodSearchPagePrice).split(" ");
 		System.out.println("price full : "+fullPrice[0]);
@@ -75,7 +75,7 @@ public class ProductScreen extends AmazonBind {
 		String pScreenProductTitle=getText(productTitle);
 		verifyStep("Product name PDP page : "+pScreenProductTitle, "INFO");
 		org.testng.Assert.assertEquals(pScreenProductTitle, GeneralBind.productNameSearchResults);
-		swipeFullFromBottomToTop("android");
+		swipeFullFromBottomToTop(p1);
 		if(verifyIsDisplayed(pdpPageSavingsPrice))
 		{
 			GeneralBind.offerProduct=true;
@@ -84,13 +84,13 @@ public class ProductScreen extends AmazonBind {
 		pScreenPrice=pScreenPrice.replace("rupees ", "₹");
 		verifyStep("Product price PDP page : "+pScreenPrice, "INFO");
 		org.testng.Assert.assertEquals(pScreenPrice, GeneralBind.productPriceSearchResults);
-		swipeToElement("android", wishListButton);
+		swipeToElement(p1, wishListButton);
 		if(!verifyIsDisplayed(addtoCartButton))
 		{
-			swipeToElementUpwards("android", oneTimePurchase);
+			swipeToElementUpwards(p1, oneTimePurchase);
 			click(oneTimePurchase);
 		}
-		swipeToElement("android", addtoCartButton);
+		swipeToElement(p1, addtoCartButton);
 		GeneralBind.productQuantity=Integer.parseInt(getText(quantityDropdown));
 		verifyStep("Product quantity : "+GeneralBind.productQuantity, "INFO");
 		verifyText(ADD_TO_CART, addtoCartButton);
