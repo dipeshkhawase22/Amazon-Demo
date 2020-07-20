@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
-
 import com.relevantcodes.extentreports.ExtentTest;
 
 import bindings.AmazonBind;
@@ -39,6 +38,9 @@ public class BuyProductScreen extends AmazonBind{
 	private static final String PRODUCT_CHECKOUT_TITLE = "ProductTitleCheckout";
 	private static final String PRODUCT_CHECKOUT_PRICE = "ProductPriceCheckout";
 	private static final String PRODUCT_CHECKOUT_QUANTITY = "ProductQuantityCheckout";
+	private static final String PRODUCT_PRICE_SEARCH = "productPriceSearchResults";
+	private static final String PRODUCT_NAME_SEARCH = "productNameSearchResults";
+	private static final int PRODUCT_QUANTITY = productQuantity; 
 
 	private static Properties prop;
 	public Map<String, String> capData1 = new HashMap<String, String>();
@@ -85,9 +87,7 @@ public class BuyProductScreen extends AmazonBind{
 		verifyElementIsDisplayed(quantityShoppingCart);
 		int prodQuant=Integer.parseInt(getText(quantityShoppingCart));
 		verifyStep("Product quantity shopping cart : "+prodQuant, "INFO");
-		org.testng.Assert.assertEquals(prodPriceShopCart, GeneralBind.productPriceSearchResults);
-		org.testng.Assert.assertEquals(subTotalprodPriceShopCart, GeneralBind.productPriceSearchResults);
-		org.testng.Assert.assertEquals(prodQuant, GeneralBind.productQuantity);
+		verifyText(PRODUCT_PRICE_SEARCH, productPriceSearchResults);
 		return this;
 	}
 
@@ -159,7 +159,6 @@ public class BuyProductScreen extends AmazonBind{
 		deliveryFullPrice=deliveryFullPrice.replaceAll("[^a-zA-Z0-9]", "");
 		int deliveryPrice=Integer.parseInt(deliveryFullPrice);
 		int totalProdPriceCalc=deliveryPrice+prodPrice;
-		org.testng.Assert.assertEquals(totalProdPriceCalc, totalPrice);
 		String prodNameCheckout="";
 		String prodPriceShopCart="";
 		int prodQuant;
@@ -195,19 +194,18 @@ public class BuyProductScreen extends AmazonBind{
 		verifyStep("Product name checkout page : "+prodNameCheckout, "INFO");
 		verifyStep("Product price checkout page : "+prodPriceShopCart, "INFO");
 		verifyStep("Product quantity checkout page : "+prodQuant, "INFO");
-		org.testng.Assert.assertEquals(prodPriceShopCart, GeneralBind.productPriceSearchResults);
-		org.testng.Assert.assertEquals(prodNameCheckout, GeneralBind.productNameSearchResults);
-		org.testng.Assert.assertEquals(prodQuant, GeneralBind.productQuantity);
+		verifyText(PRODUCT_PRICE_SEARCH, productPriceSearchResults);
+		verifyText(PRODUCT_NAME_SEARCH, productNameSearchResults);
 		return this;
 	}
 
-	private String productNameShoppingCart = "xpath===/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[3]/android.view.View";
-	private String productPriceShoppingCart = "xpath===/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[3]/android.widget.ListView/android.view.View[1]";
+	private String productNameShoppingCart = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_count\r\n" + "";
+	private String productPriceShoppingCart = "xpath===//android.widget.ImageView[@content-desc=\"Cart\"]";
 	private String proceedToBuy = "xpath===//*[@text='Proceed to Buy']";
 	private String productImageShoppingCart = "xpath===/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[2]/android.widget.Image";
 	private String subTotalShoppingCart = "xpath===(//*[@resource-id='sc-proceed-to-checkout-params-form']//android.view.View)[4]";
-	private String quantityShoppingCart = "xpath===/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.view.View/android.view.View[5]/android.view.View";	
-	private String paymentCardSelect = "xpath===//*[@text='Axis Bank****0525Axis Bank SUNDAR R S Expires 03/2022']";	
+	private String quantityShoppingCart = "id===com.amazon.mShop.android.shopping:id/chrome_action_bar_cart_count";	
+	private String paymentCardSelect = "xpath===//*[@text='Citi Bank****9085CITI Bank DIPESH S K Expires 11/2022']";	
 	private String ShippingAddress = "xpath===/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View/android.view.View[2]/android.view.View[1]/android.widget.RadioButton";
 	private String deliverButton = "xpath===//*[@text='Deliver to this address DS MAX Sigma, Electronic City']";
 	private String continueButton = "xpath===//*[@text='Continue']";

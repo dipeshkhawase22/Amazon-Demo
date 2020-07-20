@@ -2,23 +2,23 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
     <line>
-      <![CDATA[<br>App launched</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg' height='300' width='200'/> </a><br>]]>
+      <![CDATA[<br>App launched</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\658946531.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\658946531.jpg' height='300' width='200'/> </a><br>]]>
     </line>
     <line>
       <![CDATA[<br>java.lang.AssertionError: Element not displayed
-null expected [true] but found [false]</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\793088027.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\793088027.jpg' height='300' width='200'/> </a><br>]]>
+null expected [true] but found [false]</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\94535400.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\94535400.jpg' height='300' width='200'/> </a><br>]]>
     </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="265" started-at="2020-07-09T10:14:28 IST" finished-at="2020-07-09T10:14:28 IST">
+  <suite name="Default suite" duration-ms="124" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:40 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="265" started-at="2020-07-09T10:14:28 IST" finished-at="2020-07-09T10:14:28 IST">
+    <test name="Default test" duration-ms="124" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:40 IST">
       <class name="tests.AmazonTests">
-        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:tests.AmazonTests@52e677af]" name="beforeSuite" is-config="true" duration-ms="603" started-at="2020-07-09T10:14:27 IST" finished-at="2020-07-09T10:14:28 IST">
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:tests.AmazonTests@52e677af]" name="beforeSuite" is-config="true" duration-ms="295" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:40 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method status="PASS" signature="setData(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:tests.AmazonTests@52e677af]" name="setData" is-config="true" duration-ms="9" started-at="2020-07-09T10:14:28 IST" finished-at="2020-07-09T10:14:28 IST">
+        <test-method status="PASS" signature="setData(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:tests.AmazonTests@52e677af]" name="setData" is-config="true" duration-ms="8" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:40 IST">
           <params>
             <param index="0">
               <value>
@@ -64,11 +64,11 @@ null expected [true] but found [false]</br><br><a href='C:\Users\Dipesh\git\Amaz
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setData -->
-        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:tests.AmazonTests@52e677af]" name="beforeMethod" is-config="true" duration-ms="21" started-at="2020-07-09T10:14:28 IST" finished-at="2020-07-09T10:14:28 IST">
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:tests.AmazonTests@52e677af]" name="beforeMethod" is-config="true" duration-ms="3" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:40 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method status="FAIL" signature="Amazon_Login_And_Place_Order_TC001()[pri:1, instance:tests.AmazonTests@52e677af]" name="Amazon_Login_And_Place_Order_TC001" duration-ms="107" started-at="2020-07-09T10:14:28 IST" finished-at="2020-07-09T10:14:28 IST">
+        <test-method status="FAIL" signature="Amazon_Login_And_Place_Order_TC001()[pri:1, instance:tests.AmazonTests@52e677af]" name="Amazon_Login_And_Place_Order_TC001" duration-ms="43" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:40 IST">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[Element not displayed
@@ -80,9 +80,9 @@ null expected [true] but found [false]
 at org.testng.Assert.fail(Assert.java:97)
 at org.testng.Assert.failNotEquals(Assert.java:969)
 at org.testng.Assert.assertTrue(Assert.java:43)
-at bindings.GeneralBind.verifyElementIsDisplayed(GeneralBind.java:161)
-at basePages.LoginScreen.signIn(LoginScreen.java:45)
-at tests.AmazonTests.Amazon_Login_And_Place_Order_TC001(AmazonTests.java:49)
+at bindings.GeneralBind.verifyElementIsDisplayed(GeneralBind.java:165)
+at basePages.LoginScreen.signIn(LoginScreen.java:51)
+at tests.AmazonTests.Amazon_Login_And_Place_Order_TC001(AmazonTests.java:48)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -116,26 +116,26 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
             <line>
-              <![CDATA[<br>App launched</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg' height='300' width='200'/> </a><br>]]>
+              <![CDATA[<br>App launched</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\658946531.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\658946531.jpg' height='300' width='200'/> </a><br>]]>
             </line>
           </reporter-output>
         </test-method> <!-- Amazon_Login_And_Place_Order_TC001 -->
-        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:tests.AmazonTests@52e677af]" name="afterMethod" is-config="true" duration-ms="48" started-at="2020-07-09T10:14:28 IST" finished-at="2020-07-09T10:14:28 IST">
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:tests.AmazonTests@52e677af]" name="afterMethod" is-config="true" duration-ms="10" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:40 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=Amazon_Login_And_Place_Order_TC001 status=FAILURE method=AmazonTests.Amazon_Login_And_Place_Order_TC001()[pri:1, instance:tests.AmazonTests@52e677af] output=<br>App launched</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\331669159.jpg' height='300' width='200'/> </a><br>]]]>
+                <![CDATA[[TestResult name=Amazon_Login_And_Place_Order_TC001 status=FAILURE method=AmazonTests.Amazon_Login_And_Place_Order_TC001()[pri:1, instance:tests.AmazonTests@52e677af] output=<br>App launched</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\658946531.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\658946531.jpg' height='300' width='200'/> </a><br>]]]>
               </value>
             </param>
           </params>
           <reporter-output>
             <line>
               <![CDATA[<br>java.lang.AssertionError: Element not displayed
-null expected [true] but found [false]</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\793088027.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\793088027.jpg' height='300' width='200'/> </a><br>]]>
+null expected [true] but found [false]</br><br><a href='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\94535400.jpg'> <img src='C:\Users\Dipesh\git\Amazon-Demo\Amazon-Demo\reports\images\94535400.jpg' height='300' width='200'/> </a><br>]]>
             </line>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method status="PASS" signature="afterSuite()[pri:0, instance:tests.AmazonTests@52e677af]" name="afterSuite" is-config="true" duration-ms="782" started-at="2020-07-09T10:14:28 IST" finished-at="2020-07-09T10:14:29 IST">
+        <test-method status="PASS" signature="afterSuite()[pri:0, instance:tests.AmazonTests@52e677af]" name="afterSuite" is-config="true" duration-ms="500" started-at="2020-07-20T13:18:40 IST" finished-at="2020-07-20T13:18:41 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->

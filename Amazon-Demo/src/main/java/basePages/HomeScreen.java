@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.testng.Assert;
-
 import com.relevantcodes.extentreports.ExtentTest;
 
 import bindings.AmazonBind;
@@ -34,6 +32,8 @@ public class HomeScreen extends AmazonBind {
 	private static final String CART_BUTTON = "cartButton";
 	private static final String CART_COUNT = "cartCount";
 	private static final String DELETE_BUTTON = "deleteButton";
+	private static final String NAME_ACTUAL = "actualName";
+	private static final String NAME_EXPECTED = "expectedName";
 
 	private static Properties prop;
 	public Map<String, String> capData1 = new HashMap<String, String>();
@@ -89,7 +89,8 @@ public class HomeScreen extends AmazonBind {
 		String actualName=getText(helloText);
 		actualName=actualName.replace("Hello, ", "");
 		String expectedName=signinDetailsMap.get("Name");
-		Assert.assertEquals(actualName, expectedName);
+		verifyText(NAME_ACTUAL, actualName);
+		verifyText(NAME_EXPECTED, expectedName);
 		verifyText(HOME_BUTTON, homeButton);
 		verifyElementIsDisplayed(homeButton);
 		click(homeButton);
@@ -151,7 +152,6 @@ public class HomeScreen extends AmazonBind {
 	private String homeButton = "id===com.amazon.mShop.android.shopping:id/web_home_shop_by_department_label";
 	private String cartButton = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_image";
 	private String deleteButton = "xpath===(//*[@text='Delete'])[2]";
-	private String ProductRemovedConfirmation = "xpath===/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v4.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ViewAnimator/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.view.View";
 	private String cartCount = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_count";
 	private String searchBar = "id===com.amazon.mShop.android.shopping:id/rs_search_src_text";
 	private String searchResult1 = "xpath===(//*[@resource-id='com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_text'])[1]";

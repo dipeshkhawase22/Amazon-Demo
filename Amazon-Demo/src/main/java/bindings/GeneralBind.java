@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotSelectableException;
 import org.openqa.selenium.ElementNotVisibleException;
@@ -32,13 +33,14 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import utilities.Reporter;
 
 public class GeneralBind extends Reporter {
-	
+
 	public MobileDriver driver;
 	protected Properties prop;
 	public Map<String, String> capData = new HashMap<String, String>();
 	public static String productNameSearchResults="";
 	public static String productPriceSearchResults="";
 	public static int productQuantity;
+	public static int getNumber;
 	public static boolean offerProduct=false;
 	public String p1 = "android";
 	//public String p2 = "iOS";
@@ -70,7 +72,8 @@ public class GeneralBind extends Reporter {
 		DesiredCapabilities caps = new DesiredCapabilities();
 		try {		
 			String dir = System.getProperty("user.dir");
-			url = new URL("http://" + "127.0.0.1" + ":" + capData.get("Port") + "/wd/hub");
+			//url = new URL("http://" + "192.168.1.5" + ":" + capData.get("Port") + "/wd/hub");
+			url = new URL("http://192.168.1.5:4723/wd/hub");
 			switch (capData.get("PlatformName").toLowerCase()) {
 			case "android":
 				caps.setCapability(MobileCapabilityType.PLATFORM_NAME, capData.get("PlatformName"));
@@ -221,7 +224,6 @@ public class GeneralBind extends Reporter {
 				}
 			}
 			Assert.assertTrue(true, property + " is displayed or not validation");
-
 		} 
 		catch (ElementNotFoundException e) {
 			Assert.assertTrue(true, property + "Element not found\n" + e.getMessage());
@@ -397,7 +399,7 @@ public class GeneralBind extends Reporter {
 		System.out.println("Swiping......");
 		try {
 			Thread.sleep(2000);
-			org.openqa.selenium.Dimension scrnSize = driver.manage().window().getSize();
+			Dimension scrnSize = driver.manage().window().getSize();
 			int startx = (int) (scrnSize.width / 2);
 			int starty = (int) (scrnSize.height*0.3);
 			int endy = (int) (scrnSize.height*0.8);
@@ -435,7 +437,7 @@ public class GeneralBind extends Reporter {
 	public void swipeFullFromTopToBottom(String pfName) {
 		try {
 			Thread.sleep(2000);
-			org.openqa.selenium.Dimension scrnSize = driver.manage().window().getSize();
+			Dimension scrnSize = driver.manage().window().getSize();
 			int startx = (int) (scrnSize.width / 2);
 			int endy = (int) (scrnSize.height - 1);
 			int starty = (int) (scrnSize.height * 0.2);

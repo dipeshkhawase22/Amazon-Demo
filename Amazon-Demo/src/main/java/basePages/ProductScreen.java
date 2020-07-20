@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.testng.Assert;
+
 import com.relevantcodes.extentreports.ExtentTest;
 
 import bindings.AmazonBind;
@@ -24,6 +26,7 @@ public class ProductScreen extends AmazonBind {
 	private static final String ADD_TO_CART = "addtoCartButton";
 	private static final String CART_COUNT = "cartCount";
 	private static final String CART_BUTTON = "cartButton";
+	private static final String PRODUCT_NAME_SEARCH = "productNameSearchResults";
 
 	private static Properties prop;
 	public Map<String, String> capData1 = new HashMap<String, String>();
@@ -53,7 +56,7 @@ public class ProductScreen extends AmazonBind {
 		System.out.println("name full : "+GeneralBind.productNameSearchResults);
 		if(!fullPrice[0].contains("₹"))
 		{
-			org.testng.Assert.assertTrue(false,"₹ not present in search results page");
+			Assert.assertTrue(false,"₹ not present in search results page");
 		}
 		GeneralBind.productPriceSearchResults=fullPrice[0];
 		verifyStep("Product Name search page :"+GeneralBind.productNameSearchResults, "INFO");
@@ -74,7 +77,7 @@ public class ProductScreen extends AmazonBind {
 		verifyStep("Product details page displayed", "PASS");
 		String pScreenProductTitle=getText(productTitle);
 		verifyStep("Product name PDP page : "+pScreenProductTitle, "INFO");
-		org.testng.Assert.assertEquals(pScreenProductTitle, GeneralBind.productNameSearchResults);
+		verifyText(PRODUCT_NAME_SEARCH, productNameSearchResults);
 		swipeFullFromBottomToTop(p1);
 		if(verifyIsDisplayed(pdpPageSavingsPrice))
 		{
@@ -83,7 +86,7 @@ public class ProductScreen extends AmazonBind {
 		String pScreenPrice=getText(productPrice);
 		pScreenPrice=pScreenPrice.replace("rupees ", "₹");
 		verifyStep("Product price PDP page : "+pScreenPrice, "INFO");
-		org.testng.Assert.assertEquals(pScreenPrice, GeneralBind.productPriceSearchResults);
+		verifyText(PRODUCT_NAME_SEARCH, productNameSearchResults);
 		swipeToElement(p1, wishListButton);
 		if(!verifyIsDisplayed(addtoCartButton))
 		{
@@ -132,8 +135,8 @@ public class ProductScreen extends AmazonBind {
 	private String cartButton = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_image";
 	private String oneTimePurchase = "xpath===//*[@resource-id='oneTimeBuyBox']";
 	private String pdpPageSavingsPrice = "xpath===//*[@resource-id='atfRedesign_buyingPrice_savings']";
-	private String prodSearchPageTitle = "xpath===(((//*[@resource-id='com.amazon.mShop.android.shopping:id/list_product_description_layout'])[2]//android.widget.LinearLayout)[1]//android.widget.TextView)[1]";
-	private String prodSearchPagePrice = "xpath===((//*[@resource-id='com.amazon.mShop.android.shopping:id/list_product_description_layout'])[2]//android.widget.LinearLayout)[2]//android.view.ViewGroup//android.widget.TextView";
+	private String prodSearchPageTitle = "id===bylineInfo_feature_div";
+	private String prodSearchPagePrice = "id===atfRedesign_priceblock_priceToPay";
 	private String cartCount = "id===com.amazon.mShop.android.shopping:id/action_bar_cart_count";
 	private String productSearchImage = "com.amazon.mShop.android.shopping:id/rs_results_image";
 	private String productSearchTitle = "com.amazon.mShop.android.shopping:id/item_title";
@@ -142,3 +145,4 @@ public class ProductScreen extends AmazonBind {
 	private String searchResult1 = "xpath===(//*[@resource-id='com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_text'])[1]";
 	private String searchListPageImage1 = "xpath===(//*[@resource-id='com.amazon.mShop.android.shopping:id/rs_results_image'])[1]";
 }
+	
